@@ -1,5 +1,5 @@
 import TodoItem from "./TodoItem";
-import "./TodoList.css";
+import "./App.css";
 
 function TodoList({ todos, onDelete, onChange, onEdit }) {
   return (

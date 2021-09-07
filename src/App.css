@@ -7,12 +7,71 @@
 }
 
 .todoTitle {
-  color: rgb(16, 100, 224);
+  color: blue;
   font-size: 26px;
   text-align: center;
   align-items: stretch;
   justify-content: center;
 }
+.todoForm {
+  padding: 15px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.inputForm {
+  border: blue solid 2px;
+  border-radius: 5px;
+  font-size: 25px;
+  color: rgb(19, 230, 19);
+}
+.addBtn {
+  border: blue solid 2px;
+  border-radius: 5px;
+  color: rgb(255, 81, 0);
+}
 
-
-
+.todoItem {
+  font-size: 20px;
+  border: 2px solid rgb(11, 26, 161);
+  border-radius: 5px;
+  margin: 5px;
+  background-color: rgb(106, 182, 106);
+  align-items: stretch;
+}
+.deleteBtn {
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  color: brown;
+  font-style: bold;
+  border: 2px solid rgb(11, 26, 161);
+  border-radius: 5px;
+}
+.editeBtn {
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  color: brown;
+  font-style: bold;
+  border: 2px solid rgb(11, 26, 161);
+  border-radius: 5px;
+}
+.todoList {
+  color: rgb(35, 77, 218);
+}
+.todoFooter {
+  font-size: 20px;
+  margin: 5px;
+  border: 2px solid rgb(11, 26, 161);
+  background-color: rgb(106, 182, 106);
+  border-radius: 5px;
+  color: blue;
+}
+.completedBtn {
+  /* margin: 5px; */
+  padding: 5px;
+  color: blue;
+  border: 2px solid rgb(11, 26, 161);
+  border-radius: 5px;
+}

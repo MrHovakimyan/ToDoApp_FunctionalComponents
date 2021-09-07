@@ -1,4 +1,4 @@
-import "./TodoItem.css";
+import "./App.css";
 function TodoItem({ todo, onChange, onDelete, onEdit }) {
   return (
     <div className="todoItem">

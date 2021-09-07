@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./TodoForm.css";
+import "./App.css";
 
 function TodoForm({ onAdd }) {
   const [text, setText] = useState("");
