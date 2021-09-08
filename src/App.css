@@ -60,18 +60,4 @@
 .todoList {
   color: rgb(35, 77, 218);
 }
-.todoFooter {
-  font-size: 20px;
-  margin: 5px;
-  border: 2px solid rgb(11, 26, 161);
-  background-color: rgb(106, 182, 106);
-  border-radius: 5px;
-  color: blue;
-}
-.completedBtn {
-  /* margin: 5px; */
-  padding: 5px;
-  color: blue;
-  border: 2px solid rgb(11, 26, 161);
-  border-radius: 5px;
-}
+

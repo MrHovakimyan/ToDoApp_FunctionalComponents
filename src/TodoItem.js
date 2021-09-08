@@ -27,7 +27,7 @@ function TodoItem({ todo, onChange, onDelete, onEdite }) {
           onClick={(evt) => {
             onEdite({
               ...todo,
-              text: evt.target.text,
+              text: evt.target.value,
             });
           }}
         >

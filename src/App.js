@@ -59,8 +59,9 @@ function App() {
             todos.map((todo) => {
               debugger;
               if (todo.id === newTodo.id) {
-                return (todo.text = newInput);
+                todo.text = newInput;
               }
+              return todo;
             })
           );
         }}
