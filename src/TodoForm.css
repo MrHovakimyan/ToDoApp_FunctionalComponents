@@ -1,0 +1,17 @@
+.todoForm {
+    padding: 15px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
+  .inputForm {
+    border: blue solid 2px;
+    border-radius: 5px;
+    font-size: 25px;
+    color: rgb(19, 230, 19);
+  }
+  .addBtn {
+    border: blue solid 2px;
+    border-radius: 5px;
+    color: rgb(255, 81, 0);
+  }
