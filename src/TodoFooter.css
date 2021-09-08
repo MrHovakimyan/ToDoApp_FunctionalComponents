@@ -7,7 +7,6 @@
     color: blue;
   }
   .completedBtn {
-    justify-items: space-between;
     padding: 5px;
     color: blue;
     border: 2px solid rgb(11, 26, 161);
