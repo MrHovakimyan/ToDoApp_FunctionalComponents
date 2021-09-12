@@ -1,7 +1,7 @@
 import TodoItem from "./TodoItem";
 import "./TodoList.css";
 
-function TodoList({ todos, onDelete, onChange, onEdite }) {
+function TodoList({ todos, onDelete, onChange, onEdit }) {
   return (
     <div className="todoList">
       {todos.map((todo) => {
@@ -11,7 +11,7 @@ function TodoList({ todos, onDelete, onChange, onEdite }) {
             todo={todo}
             onChange={onChange}
             onDelete={onDelete}
-            onEdite={onEdite}
+            onEdit={onEdit}
           />
         );
       })}

@@ -1,5 +1,5 @@
 import "./TodoItem.css";
-function TodoItem({ todo, onChange, onDelete, onEdite }) {
+function TodoItem({ todo, onChange, onDelete, onEdit }) {
   return (
     <div className="todoItem">
       <label>
@@ -23,15 +23,15 @@ function TodoItem({ todo, onChange, onDelete, onEdite }) {
           Remove
         </button>
         <button
-          className="editeBtn"
+          className="editBtn"
           onClick={(evt) => {
-            onEdite({
+            onEdit({
               ...todo,
               text: evt.target.value,
             });
           }}
         >
-          Edite
+          Edit
         </button>
       </label>
     </div>

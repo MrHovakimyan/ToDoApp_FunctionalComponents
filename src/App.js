@@ -53,11 +53,10 @@ function App() {
             })
           );
         }}
-        onEdite={(newTodo) => {
+        onEdit={(newTodo) => {
           const newInput = prompt();
           setTodos(
             todos.map((todo) => {
-              debugger;
               if (todo.id === newTodo.id) {
                 todo.text = newInput;
               }
