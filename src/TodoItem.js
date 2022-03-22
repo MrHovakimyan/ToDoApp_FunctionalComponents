@@ -1,10 +1,10 @@
 import "./App.css";
 function TodoItem({ todo, onChange, onDelete, onEdit }) {
   return (
-    <div className="todoItem">
-      <label>
-        {todo.text}
+    <div className="todoItemWrp">
+      <label className="toDoItemLbl">
         <input
+          className="toDoItemLblCheckBox"
           type="checkbox"
           checked={todo.isCompleted}
           onChange={(evt) => {
@@ -14,8 +14,11 @@ function TodoItem({ todo, onChange, onDelete, onEdit }) {
             });
           }}
         />
+        {todo.text}
+      </label>
+      <div className="todoItem">
         <button
-          className="deleteBtn"
+          className="todoItemBtn"
           onClick={() => {
             onDelete(todo);
           }}
@@ -23,7 +26,7 @@ function TodoItem({ todo, onChange, onDelete, onEdit }) {
           Remove
         </button>
         <button
-          className="editBtn"
+          className="todoItemBtn"
           onClick={(evt) => {
             onEdit({
               ...todo,
@@ -33,7 +36,7 @@ function TodoItem({ todo, onChange, onDelete, onEdit }) {
         >
           Edit
         </button>
-      </label>
+      </div>
     </div>
   );
 }

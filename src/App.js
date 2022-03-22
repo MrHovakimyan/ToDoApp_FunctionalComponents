@@ -26,9 +26,11 @@ function App() {
   return (
     <div className="App">
       <div className="todoTitle"> Things that need to be done!!! </div>
+
       <TodoForm
         onAdd={(text) => {
           setTodos([
+            // we need to pass new arr, otherwise "react" won't update the state
             ...todos,
             {
               id: Math.random(),
@@ -38,6 +40,7 @@ function App() {
           ]);
         }}
       />
+
       <TodoList
         todos={todos}
         onDelete={(todo) => {
@@ -54,7 +57,7 @@ function App() {
           );
         }}
         onEdit={(newTodo) => {
-          const newInput = prompt();
+          const newInput = prompt("Task need to be edited, type it ?");
           setTodos(
             todos.map((todo) => {
               if (todo.id === newTodo.id) {
@@ -65,6 +68,7 @@ function App() {
           );
         }}
       />
+
       <TodoFooter
         todos={todos}
         onClearCompleted={() => {
