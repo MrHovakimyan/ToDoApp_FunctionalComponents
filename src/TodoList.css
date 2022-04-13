@@ -1,6 +1,0 @@
-.todoList {
-    display: flexbox;
-    justify-content: stretch; 
-    justify-items: flex-end;
-    color: rgb(35, 77, 218);
-  }
