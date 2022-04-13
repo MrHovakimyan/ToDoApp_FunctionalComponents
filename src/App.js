@@ -27,50 +27,75 @@ function App() {
   return (
     <>
       <div className="App">
-        <div className="todoTitle"> Things that need to be done!!! </div>
+        <div className="todoTitle">
+          <label>Things that need to be done!!!</label>
+          <TodoForm
+            onAdd={(text) => {
+              setTodos([
+                // we need to pass new arr, otherwise "react" won't update the state
+                ...todos,
+                {
+                  id: Math.random(),
+                  text: text,
+                  isCompleted: false,
+                },
+              ]);
+            }}
+          />
+        </div>
 
-        <TodoForm
-          onAdd={(text) => {
-            setTodos([
-              // we need to pass new arr, otherwise "react" won't update the state
-              ...todos,
-              {
-                id: Math.random(),
-                text: text,
-                isCompleted: false,
-              },
-            ]);
-          }}
-        />
+        <div className="columnWrpr">
+          <div className="toDoColumn">
+            <label className="toDoColumn-Lbl">ToDo</label>
+            <TodoList
+              todos={todos}
+              onDelete={(todo) => {
+                setTodos(todos.filter((t) => t.id !== todo.id));
+              }}
+              onChange={(newTodo) => {
+                setTodos(
+                  todos.map((todo) => {
+                    if (todo.id === newTodo.id) {
+                      return newTodo;
+                    }
+                    return todo;
+                  })
+                );
+              }}
+              onEdit={(newTodo) => {
+                let newInput;
+                todos.map((todo) => {
+                  if (todo.id === newTodo.id) {
+                    newInput = prompt("Task need to be edited ? Type it...", todo.text);
+                  }
+                  return newInput;
+                });
 
-        <TodoList
-          todos={todos}
-          onDelete={(todo) => {
-            setTodos(todos.filter((t) => t.id !== todo.id));
-          }}
-          onChange={(newTodo) => {
-            setTodos(
-              todos.map((todo) => {
-                if (todo.id === newTodo.id) {
-                  return newTodo;
-                }
-                return todo;
-              })
-            );
-          }}
-          onEdit={(newTodo) => {
-            const newInput = prompt("Task need to be edited ? Type it...");
-            setTodos(
-              todos.map((todo) => {
-                if (todo.id === newTodo.id) {
-                  todo.text = newInput;
-                  return todo;
-                }
-                return todo;
-              })
-            );
-          }}
-        />
+                setTodos(
+                  todos.map((todo) => {
+                    if (todo.id === newTodo.id) {
+                      if (newInput === "") {
+                        alert("Please enter any text");
+                        return todo;
+                      } else if (newInput === null) {
+                        return todo;
+                      }
+                      todo.text = newInput;
+                      return todo;
+                    }
+                    return todo;
+                  })
+                );
+              }}
+            />
+          </div>
+          <div className="inProgressColumn">
+            <label className="inProgressColumn-Lbl">In progress</label>
+          </div>
+          <div className="doneColumn">
+            <label className="doneColumn-Lbl">Done</label>
+          </div>
+        </div>
 
         <TodoFooter
           todos={todos}
