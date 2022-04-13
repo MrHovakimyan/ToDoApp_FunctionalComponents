@@ -3,12 +3,18 @@ import "./App.css";
 
 function TodoForm({ onAdd }) {
   const [text, setText] = useState("");
+
   return (
     <form
       className="todoForm"
       onSubmit={(evt) => {
         evt.preventDefault();
-        onAdd(text);
+        if (text === "") {
+          alert("Please insert text");
+          return;
+        } else {
+          onAdd(text);
+        }
         setText("");
       }}
     >

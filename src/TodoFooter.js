@@ -1,4 +1,5 @@
 import "./App.css";
+
 function TodoFooter({ todos, onClearCompleted, onClearAll }) {
   const completedTasks = todos.filter((todo) => todo.isCompleted).length;
   return (

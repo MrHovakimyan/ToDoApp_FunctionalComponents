@@ -18,6 +18,8 @@
   font-size: 28px;
   font-weight: bold;
 }
+/* -------------------------------------------------------- */
+
 /* Input & Add button */
 .todoForm {
   padding: 15px;
@@ -49,6 +51,7 @@
 .todoList {
   color: rgb(35, 77, 218);
   border: 3px solid blue;
+  border-radius: 5px;
   width: 60%;
 }
 .todoItemWrp {
@@ -88,6 +91,13 @@
   background-color: yellowgreen;
 }
 
+.draggable {
+  cursor: move;
+}
+/* .draggable.dragging {
+  color: red;
+} */
+
 /* ------------------------------------------ */
 
 /* ToDo footer */
@@ -98,6 +108,7 @@
   align-items: center;
   font-size: 20px;
   margin: 5px;
+  padding: 2px 6px;
   border: 2px solid rgb(11, 26, 161);
   background-color: rgba(0, 255, 0, 0.356);
   border-radius: 5px;

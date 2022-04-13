@@ -3,6 +3,7 @@ import "./App.css";
 import TodoFooter from "./TodoFooter";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
+// import DragDrop from "./DragDrop";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -24,61 +25,64 @@ function App() {
   ]);
 
   return (
-    <div className="App">
-      <div className="todoTitle"> Things that need to be done!!! </div>
+    <>
+      <div className="App">
+        <div className="todoTitle"> Things that need to be done!!! </div>
 
-      <TodoForm
-        onAdd={(text) => {
-          setTodos([
-            // we need to pass new arr, otherwise "react" won't update the state
-            ...todos,
-            {
-              id: Math.random(),
-              text: text,
-              isCompleted: false,
-            },
-          ]);
-        }}
-      />
+        <TodoForm
+          onAdd={(text) => {
+            setTodos([
+              // we need to pass new arr, otherwise "react" won't update the state
+              ...todos,
+              {
+                id: Math.random(),
+                text: text,
+                isCompleted: false,
+              },
+            ]);
+          }}
+        />
 
-      <TodoList
-        todos={todos}
-        onDelete={(todo) => {
-          setTodos(todos.filter((t) => t.id !== todo.id));
-        }}
-        onChange={(newTodo) => {
-          setTodos(
-            todos.map((todo) => {
-              if (todo.id === newTodo.id) {
-                return newTodo;
-              }
-              return todo;
-            })
-          );
-        }}
-        onEdit={(newTodo) => {
-          const newInput = prompt("Task need to be edited, type it ?");
-          setTodos(
-            todos.map((todo) => {
-              if (todo.id === newTodo.id) {
-                todo.text = newInput;
-              }
-              return todo;
-            })
-          );
-        }}
-      />
+        <TodoList
+          todos={todos}
+          onDelete={(todo) => {
+            setTodos(todos.filter((t) => t.id !== todo.id));
+          }}
+          onChange={(newTodo) => {
+            setTodos(
+              todos.map((todo) => {
+                if (todo.id === newTodo.id) {
+                  return newTodo;
+                }
+                return todo;
+              })
+            );
+          }}
+          onEdit={(newTodo) => {
+            const newInput = prompt("Task need to be edited ? Type it...");
+            setTodos(
+              todos.map((todo) => {
+                if (todo.id === newTodo.id) {
+                  todo.text = newInput;
+                  return todo;
+                }
+                return todo;
+              })
+            );
+          }}
+        />
 
-      <TodoFooter
-        todos={todos}
-        onClearCompleted={() => {
-          setTodos(todos.filter((todo) => !todo.isCompleted));
-        }}
-        onClearAll={() => {
-          setTodos([]);
-        }}
-      />
-    </div>
+        <TodoFooter
+          todos={todos}
+          onClearCompleted={() => {
+            setTodos(todos.filter((todo) => !todo.isCompleted));
+          }}
+          onClearAll={() => {
+            setTodos([]);
+          }}
+        />
+      </div>
+    </>
   );
 }
 
