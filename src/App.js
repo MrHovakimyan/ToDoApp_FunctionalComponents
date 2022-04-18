@@ -3,7 +3,8 @@ import "./App.css";
 import TodoFooter from "./TodoFooter";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
-// import DragDrop from "./DragDrop";
+
+let draggedOverElemIndex;
 
 function App() {
   const [todos, setTodos] = useState([
@@ -32,17 +33,39 @@ function App() {
     console.log("dragStart", evn.target);
     setCurrentItem(evn.target);
   }
-  function handleDragEnd(evn) {
+
+  function handleDragEnd(evn, todos) {
+    console.log("todos: ", todos);
+    const elemIndex = todos
+      .map((elem) => elem.id)
+      .indexOf(Number(evn.target.getAttribute("data-index")));
+    console.log("elem index", elemIndex);
+    debugger;
+    if (elemIndex < draggedOverElemIndex) {
+      todos.splice(todos[draggedOverElemIndex], 0, todos[elemIndex]); // replacing draggedOverElemIndex
+      todos.splice(todos[elemIndex], 1); // removing elemIndex
+    } else if (elemIndex > draggedOverElemIndex) {
+      const removedElem = todos.splice(todos[elemIndex], 1);
+      todos.splice(todos[draggedOverElemIndex], 0, removedElem[0]);
+    }
+    console.log("todos in DragEnd: ", todos);
     evn.target.classList.remove("dragging");
     console.log("dragEnd", evn.target);
+    draggedOverElemIndex = undefined;
   }
-  function handleDragOver(evn) {
+
+  function handleDragOver(evn, todos) {
     evn.preventDefault();
-    console.log("dragOver");
+
+    draggedOverElemIndex = todos
+      .map((elem) => elem.id)
+      .indexOf(Number(evn.target.getAttribute("data-index")));
+    console.log("dragOver:");
   }
-  function handleDrop(evn) {
+
+  function handleDrop(evn, todos) {
     evn.preventDefault();
-    // setTodos(todos.map((todo) => {}));
+    setTodos([...todos]);
     console.log("drop", evn.target);
   }
 
@@ -69,9 +92,9 @@ function App() {
       <div
         className="columnsWrpr"
         onDragStart={(e) => handleDragStart(e)}
-        onDragEnd={(e) => handleDragEnd(e)}
-        onDragOver={(e) => handleDragOver(e)}
-        onDrop={(e) => handleDrop(e)}
+        onDragEnd={(e) => handleDragEnd(e, todos)}
+        onDragOver={(e) => handleDragOver(e, todos)}
+        onDrop={(e) => handleDrop(e, todos)}
       >
         {/* ----- ToDo column ----- */}
         <div className="toDoColumn">

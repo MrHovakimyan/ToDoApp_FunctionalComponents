@@ -1,7 +1,7 @@
 import "./App.css";
 function TodoItem({ todo, onChange, onDelete, onEdit }) {
   return (
-    <div className="todoItemWrp draggable" draggable="true">
+    <div className="todoItemWrp draggable" draggable="true" data-index={todo.id}>
       <label className="toDoItemLbl">
         <input
           className="toDoItemLblCheckBox"
