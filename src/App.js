@@ -5,6 +5,7 @@ import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 
 let draggedOverElemIndex;
+let elemIndex;
 
 function App() {
   const [todos, setTodos] = useState([
@@ -28,45 +29,41 @@ function App() {
   const [currentItem, setCurrentItem] = useState();
 
   // Drag and Drop func handlers
-  function handleDragStart(evn) {
+  function handleDragStart(evn, todos) {
     evn.target.classList.add("dragging");
-    console.log("dragStart", evn.target);
-    setCurrentItem(evn.target);
+    const todoArr = todos.map((elem) => elem.id);
+    elemIndex = todoArr.indexOf(Number(evn.target.getAttribute("data-index")));
+    console.log("dragged elemIndex in dragStart: ", elemIndex);
   }
 
   function handleDragEnd(evn, todos) {
-    console.log("todos: ", todos);
-    const elemIndex = todos
-      .map((elem) => elem.id)
-      .indexOf(Number(evn.target.getAttribute("data-index")));
-    console.log("elem index", elemIndex);
-    debugger;
+    // debugger;
     if (elemIndex < draggedOverElemIndex) {
-      todos.splice(todos[draggedOverElemIndex], 0, todos[elemIndex]); // replacing draggedOverElemIndex
-      todos.splice(todos[elemIndex], 1); // removing elemIndex
+      todos.splice(draggedOverElemIndex, 0, todos[elemIndex]); // replacing draggedOverElemIndex
+      todos.splice(elemIndex, 1); // removing elemIndex
     } else if (elemIndex > draggedOverElemIndex) {
-      const removedElem = todos.splice(todos[elemIndex], 1);
-      todos.splice(todos[draggedOverElemIndex], 0, removedElem[0]);
+      const removedElem = todos.splice(elemIndex, 1);
+      todos.splice(draggedOverElemIndex, 0, removedElem[0]);
     }
-    console.log("todos in DragEnd: ", todos);
+    setTodos([...todos]);
+
+    console.log("todos in dragend: ", todos);
+    console.log("draggedOverElemIndex in dragEnd", draggedOverElemIndex);
+
     evn.target.classList.remove("dragging");
-    console.log("dragEnd", evn.target);
     draggedOverElemIndex = undefined;
+    elemIndex = undefined;
   }
 
   function handleDragOver(evn, todos) {
     evn.preventDefault();
 
-    draggedOverElemIndex = todos
-      .map((elem) => elem.id)
-      .indexOf(Number(evn.target.getAttribute("data-index")));
-    console.log("dragOver:");
+    const todoArr = todos.map((elem) => elem.id);
+    draggedOverElemIndex = todoArr.indexOf(Number(evn.target.getAttribute("data-index")));
   }
 
-  function handleDrop(evn, todos) {
+  function handleDrop(evn) {
     evn.preventDefault();
-    setTodos([...todos]);
-    console.log("drop", evn.target);
   }
 
   return (
@@ -91,14 +88,14 @@ function App() {
 
       <div
         className="columnsWrpr"
-        onDragStart={(e) => handleDragStart(e)}
+        onDragStart={(e) => handleDragStart(e, todos)}
         onDragEnd={(e) => handleDragEnd(e, todos)}
         onDragOver={(e) => handleDragOver(e, todos)}
-        onDrop={(e) => handleDrop(e, todos)}
+        onDrop={(e) => handleDrop(e)}
       >
         {/* ----- ToDo column ----- */}
         <div className="toDoColumn">
-          <label className="toDoColumn-Lbl">ToDo</label>
+          <div className="toDoColumn-Lbl">ToDo</div>
           <TodoList
             todos={todos}
             onDelete={(todo) => {
@@ -143,11 +140,11 @@ function App() {
         </div>
         {/* ----- In Progress column ----- */}
         <div className="inProgressColumn">
-          <label className="inProgressColumn-Lbl">In progress</label>
+          <div className="inProgressColumn-Lbl">In progress</div>
         </div>
         {/* ----- Done column ----- */}
         <div className="doneColumn">
-          <label className="doneColumn-Lbl">Done</label>
+          <div className="doneColumn-Lbl">Done</div>
         </div>
       </div>
 
