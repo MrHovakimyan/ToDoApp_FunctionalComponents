@@ -52,20 +52,13 @@
   background-color: rgb(32, 184, 32);
 }
 /* ------------------------------------------ */
-.columnsWrpr {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-}
+
 /* ToDo list */
-.toDoColumn,
-.inProgressColumn,
-.doneColumn {
+.toDoColumn {
   color: rgb(111, 255, 0);
   border: 3px solid blue;
   border-radius: 5px;
-  width: 33%;
+  width: 60%;
   margin: 3px;
   font-size: 30px;
   font-weight: 600;

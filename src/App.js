@@ -26,18 +26,13 @@ function App() {
     },
   ]);
 
-  const [currentItem, setCurrentItem] = useState();
-
-  // Drag and Drop func handlers
+  /* ---- Drag and Drop func handlers ---- */
   function handleDragStart(evn, todos) {
     evn.target.classList.add("dragging");
-    const todoArr = todos.map((elem) => elem.id);
-    elemIndex = todoArr.indexOf(Number(evn.target.getAttribute("data-index")));
-    console.log("dragged elemIndex in dragStart: ", elemIndex);
+    elemIndex = todos.map((elem) => elem.id).indexOf(Number(evn.target.getAttribute("data-index")));
   }
 
   function handleDragEnd(evn, todos) {
-    // debugger;
     if (elemIndex < draggedOverElemIndex) {
       todos.splice(draggedOverElemIndex, 0, todos[elemIndex]); // replacing draggedOverElemIndex
       todos.splice(elemIndex, 1); // removing elemIndex
@@ -47,9 +42,6 @@ function App() {
     }
     setTodos([...todos]);
 
-    console.log("todos in dragend: ", todos);
-    console.log("draggedOverElemIndex in dragEnd", draggedOverElemIndex);
-
     evn.target.classList.remove("dragging");
     draggedOverElemIndex = undefined;
     elemIndex = undefined;
@@ -57,14 +49,11 @@ function App() {
 
   function handleDragOver(evn, todos) {
     evn.preventDefault();
-
-    const todoArr = todos.map((elem) => elem.id);
-    draggedOverElemIndex = todoArr.indexOf(Number(evn.target.getAttribute("data-index")));
+    draggedOverElemIndex = todos
+      .map((elem) => elem.id)
+      .indexOf(Number(evn.target.getAttribute("data-index")));
   }
-
-  function handleDrop(evn) {
-    evn.preventDefault();
-  }
+  /* ---------------------------------------------------------- */
 
   return (
     <div className="App">
@@ -86,68 +75,57 @@ function App() {
         />
       </div>
 
+      {/* ----- ToDo Item's List ----- */}
       <div
-        className="columnsWrpr"
+        className="toDoColumn"
         onDragStart={(e) => handleDragStart(e, todos)}
         onDragEnd={(e) => handleDragEnd(e, todos)}
         onDragOver={(e) => handleDragOver(e, todos)}
-        onDrop={(e) => handleDrop(e)}
       >
-        {/* ----- ToDo column ----- */}
-        <div className="toDoColumn">
-          <div className="toDoColumn-Lbl">ToDo</div>
-          <TodoList
-            todos={todos}
-            onDelete={(todo) => {
-              setTodos(todos.filter((t) => t.id !== todo.id));
-            }}
-            onChange={(newTodo) => {
-              setTodos(
-                todos.map((todo) => {
-                  if (todo.id === newTodo.id) {
-                    return newTodo;
-                  }
-                  return todo;
-                })
-              );
-            }}
-            onEdit={(newTodo) => {
-              let newInput;
+        <TodoList
+          todos={todos}
+          onDelete={(todo) => {
+            setTodos(todos.filter((t) => t.id !== todo.id));
+          }}
+          onChange={(newTodo) => {
+            setTodos(
               todos.map((todo) => {
                 if (todo.id === newTodo.id) {
-                  newInput = prompt("Task need to be edited ? Type it...", todo.text);
+                  return newTodo;
                 }
-                return newInput;
-              });
+                return todo;
+              })
+            );
+          }}
+          onEdit={(newTodo) => {
+            let newInput;
+            todos.map((todo) => {
+              if (todo.id === newTodo.id) {
+                newInput = prompt("Task need to be edited ? Type it...", todo.text);
+              }
+              return newInput;
+            });
 
-              setTodos(
-                todos.map((todo) => {
-                  if (todo.id === newTodo.id) {
-                    if (newInput === "") {
-                      alert("Please enter any text");
-                      return todo;
-                    } else if (newInput === null) {
-                      return todo;
-                    }
-                    todo.text = newInput;
+            setTodos(
+              todos.map((todo) => {
+                if (todo.id === newTodo.id) {
+                  if (newInput === "") {
+                    alert("Please enter any text");
+                    return todo;
+                  } else if (newInput === null) {
                     return todo;
                   }
+                  todo.text = newInput;
                   return todo;
-                })
-              );
-            }}
-          />
-        </div>
-        {/* ----- In Progress column ----- */}
-        <div className="inProgressColumn">
-          <div className="inProgressColumn-Lbl">In progress</div>
-        </div>
-        {/* ----- Done column ----- */}
-        <div className="doneColumn">
-          <div className="doneColumn-Lbl">Done</div>
-        </div>
+                }
+                return todo;
+              })
+            );
+          }}
+        />
       </div>
 
+      {/* ----- ToDo Footer ----- */}
       <TodoFooter
         todos={todos}
         onClearCompleted={() => {
