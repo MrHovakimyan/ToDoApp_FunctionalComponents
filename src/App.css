@@ -46,10 +46,12 @@
   margin-left: 10px;
   padding: 10px 20px;
   font-size: 18px;
+  text-transform: uppercase;
 }
 .addBtn:hover {
   cursor: pointer;
   background-color: rgb(32, 184, 32);
+  transform: scale(1.2);
 }
 /* ------------------------------------------ */
 
@@ -86,9 +88,15 @@
 .toDoItemLbl:hover {
   cursor: pointer;
 }
+.toDoItemLblCheckBox {
+  margin: 0px 10px;
+  width: 18px;
+  height: 18px;
+}
 .toDoItemLblCheckBox:hover {
   border: 1px solid black;
   cursor: pointer;
+  transform: scale(1.5);
 }
 .todoItem {
   margin: 5px;
@@ -105,6 +113,7 @@
 .todoItemBtn:hover {
   cursor: pointer;
   background-color: yellowgreen;
+  transform: scale(1.2);
 }
 
 .draggable {
@@ -143,4 +152,5 @@
 .completedBtn:hover {
   cursor: pointer;
   background-color: yellowgreen;
+  transform: scale(1.1);
 }
